@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(express.json());
+
 
 // ─── Service URLs ──────────────────────────────────────────────────────────────
 const STUDENT_SERVICE    = 'http://localhost:3001';
@@ -20,7 +20,6 @@ const DEPARTMENT_SERVICE = 'http://localhost:3005';
 const proxyOptions = (target, pathPrefix) => ({
   target,
   changeOrigin: true,
-  pathRewrite: { [`^/${pathPrefix}`]: '' },
   on: {
     error: (err, req, res) => {
       res.status(503).json({
